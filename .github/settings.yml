@@ -1,0 +1,36 @@
+# See https://github.com/probot/settings
+
+repository:
+  name: gtmetrix-action
+  private: true
+  default_branch: main
+  allow_squash_merge: true
+  allow_merge_commit: false
+  allow_rebase_merge: false
+  delete_branch_on_merge: true
+  enable_automated_security_fixes: true
+  enable_vulnerability_alerts: true
+  has_issues: true
+  has_projects: false
+  has_wiki: false
+
+collaborators:
+  - username: samufort
+    permission: admin
+
+branches:
+  - name: main
+    protection:
+      required_pull_request_reviews:
+        required_approving_review_count: 1
+        dismiss_stale_reviews: false
+        require_code_owner_reviews: true
+        dismissal_restrictions: {}
+      required_status_checks:
+        strict: false
+        contexts:
+          - build
+          - test
+      enforce_admins: true
+      required_linear_history: true
+      restrictions: null
