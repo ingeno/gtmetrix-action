@@ -1,5 +1,14 @@
 {
   "extends": [
-    "config:base"
+    "config:js-app",
+    "group:all",
+    ":pinAllExceptPeerDependencies",
+    ":ignoreUnstable",
+    ":prImmediately",
+    ":semanticPrefixFixDepsChoreOthers",
+    ":automergeDisabled",
+    ":ignoreModulesAndTests",
+    ":autodetectPinVersions",
+    "workarounds:all"
   ]
 }
