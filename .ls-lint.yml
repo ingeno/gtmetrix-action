@@ -1,0 +1,19 @@
+ls:
+  .config.js: kebab-case
+  .dir: kebab-case
+  .js: kebab-case
+  .ts: kebab-case
+  .yml: kebab-case
+  .yaml: kebab-case
+
+  .github:
+    .dir: lowercase
+
+  __tests__:
+    .dir: regex:*
+    .test.ts: kebab-case
+
+ignore:
+  - .git
+  - .ls-lint.yml
+  - node_modules
