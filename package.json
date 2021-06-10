@@ -30,7 +30,7 @@
     "console-table-printer": "2.9.0",
     "got": "11.8.2",
     "js-yaml": "4.1.0",
-    "p-wait-for": "3.2.0"
+    "p-wait-for": "4.0.0"
   },
   "devDependencies": {
     "@ls-lint/ls-lint": "1.9.2",
