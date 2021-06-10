@@ -1,0 +1,6 @@
+poll_interval: 1
+test_configuration:
+  report: lighthouse
+  simulate_device: nexus_5
+  url: https://www.google.com
+  video: true

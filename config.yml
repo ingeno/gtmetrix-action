@@ -1,0 +1,12 @@
+poll_interval: 10
+test_configuration:
+  # browser: 2
+  # location: 9
+  report: lighthouse
+  simulate_device: nexus_5
+  url: https://www.google.com
+  video: true
+requirements:
+  structure_score: 98
+  onload_duration: 98
+  gtmetrix_grade: A
