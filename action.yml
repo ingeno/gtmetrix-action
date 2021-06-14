@@ -1,11 +1,15 @@
-name: 'Your name here'
-description: 'Provide a description here'
-author: 'Your name or organization here'
+name: 'gtmetrix-action'
+description: 'Launch a GTMetrix test and verify it meets your quality standards right from your pipeline !'
+author: 'Samuel Fortin'
 inputs:
-  milliseconds: # change this
+  api_key:
     required: true
-    description: 'input description here'
-    default: 'default value if applicable'
+    description: 'Your GTMetrix API 2.0 key'
+  configuration_file:
+    required: true
+    description: 'Path to the file containing the configuration'
 runs:
   using: 'node12'
   main: 'dist/index.js'
+branding:
+  icon: monitor

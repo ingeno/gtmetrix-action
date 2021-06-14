@@ -12,7 +12,7 @@ jest.mock('../src/gt-metrix-client')
 
 process.env.INPUT_CONFIGURATION_FILE = "./__tests__/config.yml";
 
-const configuration = yaml.load(fs.readFileSync('./config.yml', 'utf-8')) as Configuration;
+const configuration = yaml.load(fs.readFileSync('./__tests__/config.yml', 'utf-8')) as Configuration;
 
 describe('run', () => {
   afterEach(jest.resetAllMocks);
