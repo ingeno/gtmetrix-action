@@ -2,6 +2,7 @@
 
 repository:
   name: gtmetrix-action
+  description: A Github action allowing you to launch a GTMetrix test and evaluate performance regression right from your pipeline.
   private: true
   default_branch: main
   allow_squash_merge: true
@@ -30,7 +31,7 @@ branches:
         strict: false
         contexts:
           - build
-          - test
+          - runs-on-ubuntu
       enforce_admins: true
       required_linear_history: true
       restrictions: null

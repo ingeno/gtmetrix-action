@@ -5,7 +5,7 @@ export type Requirements = {
 };
 
 export type Configuration = {
-  poll_interval: number;
+  poll_interval?: number;
   requirements?: Requirements;
   test_configuration: StartTestParameters;
 };

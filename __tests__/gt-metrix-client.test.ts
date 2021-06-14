@@ -1,3 +1,5 @@
+process.env.INPUT_API_KEY = "api_key";
+
 import client from "../src/gt-metrix-client";
 import nock from 'nock';
 

@@ -24,12 +24,3 @@ jobs:
         with:
           api_key: ${{ secrets.GTMETRIX_API_KEY }}
           configuration_file: ./config.yml
-
-  runs-on-windows:
-    runs-on: windows-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: ./
-        with:
-          api_key: ${{ secrets.GTMETRIX_API_KEY }}
-          configuration_file: ./config.yml

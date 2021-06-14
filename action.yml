@@ -1,4 +1,4 @@
-name: 'gtmetrix-action'
+name: 'Run GTMetrix test'
 description: 'Launch a GTMetrix test and verify it meets your quality standards right from your pipeline !'
 author: 'Samuel Fortin'
 inputs:
@@ -9,7 +9,7 @@ inputs:
     required: true
     description: 'Path to the file containing the configuration'
 runs:
-  using: 'node12'
-  main: 'dist/index.js'
+  using: node12
+  main: dist/index.js
 branding:
   icon: monitor

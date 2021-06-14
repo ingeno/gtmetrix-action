@@ -27,6 +27,25 @@ exports.compare = compare;
 
 "use strict";
 
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -36,10 +55,13 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.GTMetrixClient = void 0;
-const got_1 = __nccwpck_require__(3061);
-const core = __nccwpck_require__(2186);
+const got_1 = __importDefault(__nccwpck_require__(3061));
+const core = __importStar(__nccwpck_require__(2186));
 class GTMetrixClient {
     constructor(apiKey) {
         this.client = got_1.default.extend({
@@ -70,7 +92,7 @@ class GTMetrixClient {
     }
 }
 exports.GTMetrixClient = GTMetrixClient;
-exports.default = new GTMetrixClient(core.getInput('api_key'));
+exports.default = new GTMetrixClient(core.getInput('api_key', { required: true }));
 
 
 /***/ }),
@@ -80,6 +102,25 @@ exports.default = new GTMetrixClient(core.getInput('api_key'));
 
 "use strict";
 
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -89,19 +130,23 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.run = void 0;
-const fs = __nccwpck_require__(5747);
-const core = __nccwpck_require__(2186);
-const p_wait_for_1 = __nccwpck_require__(414);
-const yaml = __nccwpck_require__(1917);
+const fs = __importStar(__nccwpck_require__(5747));
+const core = __importStar(__nccwpck_require__(2186));
+const p_wait_for_1 = __importDefault(__nccwpck_require__(414));
+const yaml = __importStar(__nccwpck_require__(1917));
 const console_table_printer_1 = __nccwpck_require__(9642);
-const gt_metrix_client_1 = __nccwpck_require__(7276);
+const gt_metrix_client_1 = __importDefault(__nccwpck_require__(7276));
 const compare_1 = __nccwpck_require__(2390);
+const DEFAULT_POLL_INTERVAL = 3;
 function run() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            const configuration = yaml.load(fs.readFileSync(core.getInput('configuration_file'), 'utf-8'));
+            const configuration = yaml.load(fs.readFileSync(core.getInput('configuration_file', { required: true }), 'utf-8'));
             core.info('🚀 Launching test...');
             const testId = yield gt_metrix_client_1.default.startTest(configuration.test_configuration);
             core.info(`👌 Test launched with id [${testId}]`);
@@ -110,14 +155,14 @@ function run() {
                 core.info('⏱  Polling test until completion...');
                 test = yield gt_metrix_client_1.default.getTest(testId);
                 return test.data.type === 'report' || test.data.attributes.state === 'error';
-            }), { interval: configuration.poll_interval * 1000 });
+            }), { interval: (configuration.poll_interval || DEFAULT_POLL_INTERVAL) * 1000 });
             if (test.data.attributes.state === 'error') {
-                core.setFailed(`❌ GTMetrix test ended in error state:\n${test.data.attributes.error}`);
+                core.setFailed(`❌ GTMetrix test ended in error: ${test.data.attributes.error}`);
                 return;
             }
-            console.log(test);
             const table = new console_table_printer_1.Table();
-            const attributes = test.data.attributes;
+            const report = test;
+            const attributes = report.data.attributes;
             const reportedAttributes = Object.keys(attributes)
                 .filter((key) => !['browser', 'location', 'source'].includes(key))
                 .sort();
@@ -127,7 +172,6 @@ function run() {
                 });
             }
             else {
-                configuration.requirements;
                 const metricsSuccess = [];
                 reportedAttributes.forEach((metric) => {
                     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
@@ -139,10 +183,12 @@ function run() {
                     table.addRow({ metric, reference: rowConfig.reference, value }, { color: rowConfig.color });
                 });
                 if (metricsSuccess.some((success) => success === false)) {
-                    core.setFailed('Some metrics regressed');
+                    core.setFailed('❌ Some metrics regressed');
                 }
             }
+            core.info(`📖 Report is available at ${report.data.links['report_url']}`);
             core.info(table.table.renderTable());
+            outputReportResponse(report);
         }
         catch (error) {
             core.setFailed(error.message);
@@ -150,6 +196,55 @@ function run() {
     });
 }
 exports.run = run;
+const outputReportResponse = (report) => {
+    const attributes = report.data.attributes;
+    const outputReportAttribute = (key) => {
+        if (attributes[key] !== undefined) {
+            core.setOutput(key, attributes[key]);
+        }
+    };
+    const links = report.data.links;
+    const outputReportLink = (key) => {
+        links[key] !== undefined && core.setOutput(key, links[key]);
+    };
+    outputReportAttribute('gtmetrix_grade');
+    outputReportAttribute('performance_score');
+    outputReportAttribute('structure_score');
+    outputReportAttribute('pagespeed_score');
+    outputReportAttribute('yslow_score');
+    outputReportAttribute('html_bytes');
+    outputReportAttribute('page_bytes');
+    outputReportAttribute('page_requests');
+    outputReportAttribute('redirect_duration');
+    outputReportAttribute('connect_duration');
+    outputReportAttribute('backend_duration');
+    outputReportAttribute('time_to_first_byte');
+    outputReportAttribute('first_paint_time');
+    outputReportAttribute('first_contentful_paint');
+    outputReportAttribute('dom_interactive_time');
+    outputReportAttribute('dom_content_loaded_time');
+    outputReportAttribute('dom_content_loaded_duration');
+    outputReportAttribute('onload_time');
+    outputReportAttribute('onload_duration');
+    outputReportAttribute('fully_loaded_time');
+    outputReportAttribute('rum_speed_index');
+    outputReportAttribute('speed_index');
+    outputReportAttribute('largest_contentful_paint');
+    outputReportAttribute('time_to_interactive');
+    outputReportAttribute('total_blocking_time');
+    outputReportAttribute('cumulative_layout_shift');
+    outputReportLink('har');
+    outputReportLink('video');
+    outputReportLink('report_pdf');
+    outputReportLink('report_pdf_full');
+    outputReportLink('report_url');
+    outputReportLink('screenshot');
+    outputReportLink('optimized_images');
+    outputReportLink('lighthouse');
+    outputReportLink('pagespeed');
+    outputReportLink('pagespeed_files');
+    outputReportLink('yslow');
+};
 run();
 
 

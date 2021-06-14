@@ -87,4 +87,4 @@ export class GTMetrixClient {
   }
 }
 
-export default new GTMetrixClient(core.getInput('api_key'));
+export default new GTMetrixClient(core.getInput('api_key', { required: true }));

@@ -1,3 +1,6 @@
+process.env.INPUT_API_KEY = "api_key";
+process.env.INPUT_CONFIGURATION_FILE = "./__tests__/config.yml";
+
 import { run } from '../src/main';
 import client from '../src/gt-metrix-client';
 import * as fs from 'fs';
@@ -9,8 +12,6 @@ import report from './report.json';
 import regression from './regression-report.json';
 
 jest.mock('../src/gt-metrix-client')
-
-process.env.INPUT_CONFIGURATION_FILE = "./__tests__/config.yml";
 
 const configuration = yaml.load(fs.readFileSync('./__tests__/config.yml', 'utf-8')) as Configuration;
 
