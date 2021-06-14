@@ -1,5 +1,5 @@
 name: 'build-test'
-on: # rebuild any PRs and main branch changes
+on:
   pull_request:
   push:
     branches:
@@ -7,16 +7,26 @@ on: # rebuild any PRs and main branch changes
       - 'releases/*'
 
 jobs:
-  build: # make sure build/ci work properly
+  build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - run: |
-          npm install
-      - run: |
-          npm run all
+      - run: npm install
+      - run: npm test
+      - run: npm run build
+      - run: npm run package
+
   runs-on-ubuntu:
     runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: ./
+        with:
+          api_key: ${{ secrets.GTMETRIX_API_KEY }}
+          configuration_file: ./config.yml
+
+  runs-on-windows:
+    runs-on: windows-latest
     steps:
       - uses: actions/checkout@v2
       - uses: ./
