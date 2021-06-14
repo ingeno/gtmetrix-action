@@ -10,5 +10,6 @@
     ":ignoreModulesAndTests",
     ":autodetectPinVersions",
     "workarounds:all"
-  ]
+  ],
+  "ignoreDeps": ["p-wait-for"]
 }
