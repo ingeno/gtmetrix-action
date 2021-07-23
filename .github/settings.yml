@@ -15,10 +15,6 @@ repository:
   has_projects: false
   has_wiki: false
 
-collaborators:
-  - username: samufort
-    permission: admin
-
 branches:
   - name: main
     protection:
