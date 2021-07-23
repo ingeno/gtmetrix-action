@@ -12,7 +12,7 @@ This action uses GTMetrix API 2.0 and provides the following features :
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: ingeno/gtmetrix-action@v1
+      - uses: ingeno/gtmetrix-action@v1.0.0
         with:
           api_key: ${{ secrets.GTMETRIX_API_KEY }}
           configuration_file: ./config.yml
