@@ -3,8 +3,8 @@ test_configuration:
   report: lighthouse
   simulate_device: nexus_5
   url: https://www.google.com
-  video: false
+  video: 0
 requirements:
-  structure_score: 98
+  structure_score: 50
   onload_duration: 98
   gtmetrix_grade: A
