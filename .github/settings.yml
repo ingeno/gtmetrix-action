@@ -31,3 +31,7 @@ branches:
       enforce_admins: true
       required_linear_history: true
       restrictions: null
+
+collaborators:
+  - username: johnmartel
+    permission: admin
