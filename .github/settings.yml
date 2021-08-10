@@ -35,3 +35,7 @@ branches:
 collaborators:
   - username: johnmartel
     permission: admin
+
+teams:
+  - name: admins
+    permission: admin
