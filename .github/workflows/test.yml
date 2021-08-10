@@ -15,7 +15,7 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: ${{ needs.read-node-version.outputs.NODE_VERSION }}
-      - run: npm install
+      - run: npm ci --no-fund
       - run: npm test
       - run: npm run build
       - run: npm run package
