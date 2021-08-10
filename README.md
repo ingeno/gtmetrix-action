@@ -58,6 +58,25 @@ You can configure the requirement parameters by using the exact same key as in t
 
 Outputs contains the every links in the [report response](https://gtmetrix.com/api/docs/2.0/#api-report-by-id) and every attributes except these ones : `browser`, `location` and `source`. Some outputs might not be present depending of your test parameters. For example, the `gtmetrix_grade` is only available when the test parameter `report` is `lighthouse`.
 
+## Contributing
+
+```shell
+# Make sure to use the correct version of node
+nvm use
+
+# Install dependencies
+npm install
+
+# Build
+npm run build
+
+# Test
+npm test
+
+# Package (see https://github.com/actions/typescript-action#publish-to-a-distribution-branch)
+npm run package
+```
+
 ## Roadmap
 
 - Retry on requirements failure

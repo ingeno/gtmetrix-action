@@ -8,13 +8,23 @@ on:
 
 jobs:
   build:
+    needs: read-node-version
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: ${{ needs.read-node-version.outputs.NODE_VERSION }}
       - run: npm install
       - run: npm test
       - run: npm run build
       - run: npm run package
+
+  read-node-version:
+    name: Read .nvmrc
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo ::set-output name=NODE_VERSION::$(cat .nvmrc)
 
   runs-on-ubuntu:
     runs-on: ubuntu-latest
