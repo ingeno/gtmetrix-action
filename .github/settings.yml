@@ -39,3 +39,5 @@ collaborators:
 teams:
   - name: admins
     permission: admin
+  - name: ingeno
+    permission: push
