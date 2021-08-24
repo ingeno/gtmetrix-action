@@ -1,0 +1,4 @@
+# The admins team should be owners of the repository settings to ensure that no unwanted access are given through
+# settings.yml.
+# See: https://github.com/probot/settings#security-implications
+.github/settings.yml @ingeno/admins @johnmartel
