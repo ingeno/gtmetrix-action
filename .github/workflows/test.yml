@@ -11,11 +11,11 @@ jobs:
     needs: read-node-version
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: ${{ needs.read-node-version.outputs.NODE_VERSION }}
-      - uses: actions/cache@v2
+      - uses: actions/cache@v4
         with:
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
           path: ~/.npm
@@ -35,7 +35,7 @@ jobs:
   runs-on-ubuntu:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - uses: ./
         with:
           api_key: ${{ secrets.GTMETRIX_API_KEY }}
